@@ -9,21 +9,17 @@ class api{
             $operation="getchallenge";
             $username="prueba";
             $curl = curl_init();
-          /*=============================================
-                   instanciamos los modelos
-           =============================================*/
+
             $accessKey = Modelodata::conexion($operation, $username,$curl);
             if ($accessKey) {
-
-                //instanciamos la funcion de login para verificarnos en la api
                 $sessionName = Modelodata::login($accessKey,$curl);
 
                 if($sessionName){
-                     //instanciamos la funcion de query para obtener los datos
-                    $resultado = Modelodata::query($sessionName,$curl);
+                    $consulta = "select%20id,contact_no,lastname,createdtime%20from%20Contacts;";
+                    $resultado = Modelodata::query($sessionName,$curl,$consulta);
                    $resultado = $resultado["result"];
 
-                   //creamos la variable para generar el JSON
+                   
                    $datosJson = '{
 		 
                     "data": [ ';
@@ -35,7 +31,7 @@ class api{
                        =============================================*/
            
                        $datosJson	 .= '[
-                                
+                                 "'.($i+1).'",
                                  "'.$resultado[$i]["id"].'",
                                  "'.$resultado[$i]["contact_no"].'",
                                  "'.$resultado[$i]["lastname"].'",
@@ -50,7 +46,7 @@ class api{
                    $datosJson.=  ']
                          
                    }'; 
-           //se retorna el js para cargar la data al dtatable
+           
                    echo $datosJson;
                     }
                    
@@ -66,7 +62,6 @@ class api{
  
 }
 
-//instanciamos el objeto 
 $data = new api();
 $data ->conexion();
 

@@ -35,10 +35,26 @@ body, html {
     display: flex;
     justify-content: center;
   }
-  .ov-btn-grow-box:hover {
+
+  .mostrar {
+    background: #fff; /* color de fondo */
+    color: #4741d7; /* color de fuente */
+    border: 2px solid #4741d7; /* tamaño y color de borde */
+    padding: 16px 20px;
+    border-radius: 3px; /* redondear bordes */
+    position: absolute;
+    top: 50%;
+    right: 30%;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+  }
+  .ov-btn-grow-box:hover ,.mostrar:hover {
     color: #fff;/* color de fuente hover */
   }
-  .ov-btn-grow-box::after {
+  .ov-btn-grow-box::after,.mostrar::after {
     content: "";
     background: #4741d7; /* color de fondo hover */
     position: absolute;
@@ -52,7 +68,7 @@ body, html {
     transform: scale(0, 0);
     transition: all 0.3s ease;
   }
-  .ov-btn-grow-box:hover::after {
+  .ov-btn-grow-box:hover::after ,.mostrar:hover::after {
     transition: all 0.3s ease-out;
     transform: scale(1, 1);
   }

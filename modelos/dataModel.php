@@ -1,7 +1,7 @@
 <?php
 
 class Modelodata{
-//se instancia la funcion conexion para la obtencion del token
+
    static public function conexion($operation,$username,$curl){
 
   
@@ -19,20 +19,19 @@ class Modelodata{
     $response = curl_exec($curl);
 
     curl_close($curl);
-//se decodifica la respuesta del servidor
+
     $decode = json_decode($response,true);
-    $token= $decode["result"]["token"];
-   
-    //se se cifra el token en formato md5 
+    $token= $decode["result"];
+    $token=$token["token"];
       $accessKey=md5($token."3DlKwKDMqPsiiK0B");
 
       
-//se retorna el accessKey para el login 
+
       return $accessKey;
 
+    
     }
 
-   //se instancia la funcion login para la obtencion del sessionNamede la api
     static public function login($accessKey,$curl){
 
         curl_setopt_array($curl, array(
@@ -54,25 +53,22 @@ class Modelodata{
           
           curl_close($curl);
           
-          //se decodifica la respuesta del servidor
+          
           $decode = json_decode($response,true);
-
-          // se guarda en una variable   sessionNamede que nos retorna el servidor
-          $sessionName = $decode["result"]["sessionName"];
-          //se retorna el sessionNamede para la obtencion de la informacion
+          $sessionName = $decode["result"];
+          $sessionName =  $sessionName["sessionName"];
           return  $sessionName;
           
 
 
     }
 
-    
-   //se instancia la funcion query para la obtencion de la informacion del api
+    static public function query($sessionName,$curl,$Consulta){
 
-    static public function query($sessionName,$curl){
+      
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://develop.datacrm.la/anieto/anietopruebatecnica/webservice.php?operation=query&sessionName='.$sessionName.'&query=select%20id,contact_no,lastname,createdtime%20from%20Contacts;',
+            CURLOPT_URL => 'https://develop.datacrm.la/anieto/anietopruebatecnica/webservice.php?operation=query&sessionName='.$sessionName.'&query='.$Consulta.'',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -85,10 +81,7 @@ class Modelodata{
           $response = curl_exec($curl);
           
           curl_close($curl);
-
-           //se decodifica la respuesta del servidor
           $response = json_decode($response,true);
-            //se retorna la respuesta der servidor para la obtencion de la informacion
          return  $response;
     }
 

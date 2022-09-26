@@ -36,7 +36,6 @@ $(document).ready( function () {
 });
 } );
 
-//se instancia la funcion para mostrar el div del DataTable
 function mostrar(){
     $('#table').show(); 
     $('#mostrar').hide(); 
@@ -44,8 +43,34 @@ function mostrar(){
 
  };
 
+ function Total() {
+    var params = {
+        "tipo" :"prueba"
+     
+    };
+    $.ajax({
+        data:  params,
+        url:   'controladores/Total.php',
+        dataType: 'json',
+        type:  'post',
+        success:  function (response) {
+            var json = JSON.parse(JSON.stringify(response));
+            $('#total').show(); 
+for (let index = 0; index < json.length; index++) {
+    var total = json[index];
+    
+}
 
-//se instancia la funcion para ocultar el div del DataTable
+$("#total").val(total["count"]);
+console.log(total["count"])  
+         
+         
+
+        }
+    });
+
+ }
+
  function ocultar(){
     $('#table').hide(); 
     $('#mostrar').show(); 

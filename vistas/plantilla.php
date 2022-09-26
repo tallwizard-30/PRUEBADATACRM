@@ -14,7 +14,9 @@
 
 <body>
 <div class="contenedor">
-<input type="submit"  class="ov-btn-grow-box" onclick="mostrar()" id="mostrar" value="CLICKEAME">
+<input type="submit"  class="ov-btn-grow-box" onclick="mostrar()" id="mostrar" value="mostrar">
+
+<input type="submit" value="Total" onclick="Total()" class="mostrar" >
 <input type="submit"  class="ov-btn-grow-box " onclick="ocultar()" id="ocultar" value="OCULTAR" style="display: none;">
     <div style="display:none;" id="table">
 
@@ -25,11 +27,16 @@
 <th>Numero de Contacto</th>
 <th>Primer Nombre</th>
 <th>Fecha de creacion</th>
+
+
 </tr>
 </thead>
 
 </table>
     </div>
+    
+    <input type="text" style="display:none" id="total">
+   
 
 </div>
 
